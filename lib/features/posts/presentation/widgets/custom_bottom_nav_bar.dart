@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/app_image.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -52,8 +54,11 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
               _buildNavItem(
                 index: 3,
-                icon: Icons.chat_bubble_rounded,
-                inactiveIcon: Icons.chat_bubble_outline_rounded,
+                customIcon: (color) => AppImage(
+                  assetPath: AppAssets.instance.messenger,
+                  size: 24,
+                  color: color,
+                ),
                 label: AppStrings.navChat,
               ),
               _buildNavItem(
@@ -71,8 +76,9 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem({
     required int index,
-    required IconData icon,
-    required IconData inactiveIcon,
+    IconData? icon,
+    IconData? inactiveIcon,
+    Widget Function(Color color)? customIcon,
     required String label,
   }) {
     final isSelected = currentIndex == index;
@@ -86,7 +92,10 @@ class CustomBottomNavBar extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(isSelected ? icon : inactiveIcon, color: color, size: 24),
+            if (customIcon != null)
+              customIcon(color)
+            else
+              Icon(isSelected ? icon : inactiveIcon, color: color, size: 24),
             const SizedBox(height: 4),
             Text(
               label,

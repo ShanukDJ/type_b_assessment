@@ -37,7 +37,7 @@ class ProfileMenuItem extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTextStyles.bodyLarge.copyWith(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   fontSize: 16,
                   color: effectiveTextColor,
                 ),

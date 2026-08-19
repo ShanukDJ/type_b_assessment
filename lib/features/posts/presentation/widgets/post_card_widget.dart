@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/app_image.dart';
 import '../../domain/entities/post_entity.dart';
 
 class PostCardWidget extends StatelessWidget {
@@ -89,7 +91,7 @@ class PostCardWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.headingSmall.copyWith(
                   fontSize: 16,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                   color: AppColors.onSurface,
                   height: 1.3,
                 ),
@@ -122,8 +124,8 @@ class PostCardWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Icon(
-                    Icons.chat_bubble_outline_rounded,
+                  AppImage(
+                    assetPath: AppAssets.instance.messenger,
                     size: 15,
                     color: AppColors.secondary,
                   ),

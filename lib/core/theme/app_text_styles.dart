@@ -7,8 +7,8 @@ class AppTextStyles {
 
   // Headings
   static TextStyle get headingLarge => GoogleFonts.lexendDeca(
-    fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
     color: AppColors.onSurface,
     letterSpacing: -0.5,
   );
@@ -22,7 +22,7 @@ class AppTextStyles {
 
   static TextStyle get headingSmall => GoogleFonts.lexendDeca(
     fontSize: 16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
     color: AppColors.onSurface,
   );
 
@@ -81,8 +81,8 @@ class AppTextStyles {
   );
 
   static TextStyle get buttonSecondaryText => GoogleFonts.lexendDeca(
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
     color: AppColors.onSurface,
   );
 

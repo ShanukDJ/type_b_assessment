@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/config/app_config.dart';
@@ -35,6 +36,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   final ScrollController _scrollController = ScrollController();
+  StreamSubscription<bool>? _networkSubscription;
   bool _isOffline = false;
 
   @override
@@ -42,6 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     _scrollController.addListener(_onScroll);
     _checkNetwork();
+    _listenNetwork();
   }
 
   Future<void> _checkNetwork() async {
@@ -56,8 +59,24 @@ class _DashboardPageState extends State<DashboardPage> {
     } catch (_) {}
   }
 
+  void _listenNetwork() {
+    try {
+      final networkInfo = context.read<NetworkInfoService>();
+      _networkSubscription = networkInfo.onConnectivityChanged.listen((
+        isConnected,
+      ) {
+        if (mounted) {
+          setState(() {
+            _isOffline = !isConnected;
+          });
+        }
+      });
+    } catch (_) {}
+  }
+
   @override
   void dispose() {
+    _networkSubscription?.cancel();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
@@ -195,9 +214,11 @@ class _DashboardPageState extends State<DashboardPage> {
                         ],
                         SliverToBoxAdapter(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 8,
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                              top: 36,
+                              bottom: 8,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

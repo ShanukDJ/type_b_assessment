@@ -290,7 +290,12 @@ class DashboardShimmerView extends StatelessWidget {
             const SizedBox(height: 12),
           ],
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 36,
+              bottom: 8,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

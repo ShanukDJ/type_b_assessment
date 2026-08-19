@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_avatar.dart';
+import '../../../../core/widgets/app_image.dart';
 import '../../domain/entities/post_entity.dart';
 
 class PostDetailPage extends StatefulWidget {
@@ -57,63 +59,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
               decoration: const BoxDecoration(
                 gradient: AppColors.featuredCardGradient,
               ),
-              child: Stack(
-                children: [
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: AppColors.white.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Text('📰', style: TextStyle(fontSize: 48)),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 16,
-                    left: 20,
-                    right: 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary2.withValues(alpha: 0.7),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            post.estimatedReadingTime,
-                            style: AppTextStyles.bodySmall.copyWith(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary2.withValues(alpha: 0.7),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            post.timeAgo,
-                            style: AppTextStyles.bodySmall.copyWith(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              child: const Center(
+                child: Text('📰', style: TextStyle(fontSize: 48)),
               ),
             ),
             Padding(
@@ -215,7 +162,11 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         ),
                         Container(width: 1, height: 30, color: AppColors.line),
                         _buildStat(
-                          icon: Icons.chat_bubble_rounded,
+                          customIcon: AppImage(
+                            assetPath: AppAssets.instance.messenger,
+                            size: 16,
+                            color: AppColors.warning,
+                          ),
                           color: AppColors.warning,
                           value: '${post.tags.length * 4 + 2}',
                           label: AppStrings.commentsLabel,
@@ -234,7 +185,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
   }
 
   Widget _buildStat({
-    required IconData icon,
+    IconData? icon,
+    Widget? customIcon,
     required Color color,
     required String value,
     required String label,
@@ -244,7 +196,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: color, size: 16),
+            if (customIcon != null)
+              customIcon
+            else if (icon != null)
+              Icon(icon, color: color, size: 16),
             const SizedBox(width: 6),
             Text(
               value,

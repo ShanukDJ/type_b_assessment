@@ -99,69 +99,92 @@ class ProfilePage extends StatelessWidget {
             imageUrl = authState.user.image;
           }
 
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-
-                AppAvatar(
-                  initials: initials,
-                  imageUrl: imageUrl,
-                  radius: 54,
-                  showCameraBadge: true,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.changeAvatarFeature),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  fullName,
-                  style: AppTextStyles.headingLarge.copyWith(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        AppAvatar(
+                          initials: initials,
+                          imageUrl: imageUrl,
+                          radius: 54,
+                          showCameraBadge: true,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.changeAvatarFeature,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          fullName,
+                          style: AppTextStyles.headingLarge.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        ProfileMenuItem(
+                          icon: Icons.settings_outlined,
+                          title: AppStrings.menuSettings,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.menuSettings,
+                          ),
+                        ),
+                        ProfileMenuItem(
+                          icon: Icons.people_outline_rounded,
+                          title: AppStrings.menuMyFriends,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.menuMyFriends,
+                          ),
+                        ),
+                        ProfileMenuItem(
+                          icon: Icons.favorite_border_rounded,
+                          title: AppStrings.menuMyFavourite,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.menuMyFavourite,
+                          ),
+                        ),
+                        ProfileMenuItem(
+                          icon: Icons.star_outline_rounded,
+                          title: AppStrings.menuLatestReviews,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.menuLatestReviews,
+                          ),
+                        ),
+                        ProfileMenuItem(
+                          icon: Icons.rss_feed_rounded,
+                          title: AppStrings.menuFollowers,
+                          onTap: () => _showComingSoon(
+                            context,
+                            AppStrings.menuFollowers,
+                          ),
+                        ),
+                        const Spacer(),
+                        const SizedBox(height: 16),
+                        ProfileMenuItem(
+                          icon: Icons.power_settings_new_rounded,
+                          title: AppStrings.menuLogOut,
+                          textColor: AppColors.critical,
+                          iconColor: AppColors.critical,
+                          onTap: () => _showLogoutDialog(context),
+                        ),
+                        const SizedBox(height: 48),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 24),
-                ProfileMenuItem(
-                  icon: Icons.settings_outlined,
-                  title: AppStrings.menuSettings,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.menuSettings),
-                ),
-                ProfileMenuItem(
-                  icon: Icons.people_outline_rounded,
-                  title: AppStrings.menuMyFriends,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.menuMyFriends),
-                ),
-                ProfileMenuItem(
-                  icon: Icons.favorite_border_rounded,
-                  title: AppStrings.menuMyFavourite,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.menuMyFavourite),
-                ),
-                ProfileMenuItem(
-                  icon: Icons.star_outline_rounded,
-                  title: AppStrings.menuLatestReviews,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.menuLatestReviews),
-                ),
-                ProfileMenuItem(
-                  icon: Icons.rss_feed_rounded,
-                  title: AppStrings.menuFollowers,
-                  onTap: () =>
-                      _showComingSoon(context, AppStrings.menuFollowers),
-                ),
-                const SizedBox(height: 16),
-                ProfileMenuItem(
-                  icon: Icons.power_settings_new_rounded,
-                  title: AppStrings.menuLogOut,
-                  textColor: AppColors.critical,
-                  iconColor: AppColors.critical,
-                  onTap: () => _showLogoutDialog(context),
-                ),
-                const SizedBox(height: 32),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
