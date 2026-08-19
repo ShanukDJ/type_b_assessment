@@ -12,9 +12,9 @@ import '../widgets/profile_menu_item.dart';
 
 class ProfilePage extends StatelessWidget {
   final VoidCallback onBack;
-  final AppConfig appConfig;
+  final AppConfig? appConfig;
 
-  const ProfilePage({super.key, required this.onBack, required this.appConfig});
+  const ProfilePage({super.key, required this.onBack, this.appConfig});
 
   void _showLogoutDialog(BuildContext context) {
     showDialog(
@@ -79,7 +79,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: Text(AppStrings.profileTitle, style: AppTextStyles.headingSmall),
+        title: Text(AppStrings.profileTitle, style: AppTextStyles.screenTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
           onPressed: onBack,
@@ -89,7 +89,6 @@ class ProfilePage extends StatelessWidget {
         builder: (context, authState) {
           String fullName = 'Esther Howard';
           String initials = 'EH';
-          String email = 'esther.howard@example.com';
           String? imageUrl;
 
           if (authState is Authenticated) {
@@ -97,7 +96,6 @@ class ProfilePage extends StatelessWidget {
                 ? authState.user.fullName
                 : authState.user.username;
             initials = authState.user.initials;
-            email = authState.user.email;
             imageUrl = authState.user.image;
           }
 
@@ -106,7 +104,6 @@ class ProfilePage extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
 
-                // Large Avatar with camera badge
                 AppAvatar(
                   initials: initials,
                   imageUrl: imageUrl,
@@ -116,8 +113,6 @@ class ProfilePage extends StatelessWidget {
                       _showComingSoon(context, AppStrings.changeAvatarFeature),
                 ),
                 const SizedBox(height: 16),
-
-                // Full Name
                 Text(
                   fullName,
                   style: AppTextStyles.headingLarge.copyWith(
@@ -125,40 +120,7 @@ class ProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 4),
-
-                // Email
-                Text(
-                  email,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.secondary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-
-                // Environment Badge
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.line, width: 0.8),
-                  ),
-                  child: Text(
-                    '${AppStrings.environmentPrefix} ${appConfig.environmentName}',
-                    style: AppTextStyles.bodySmall.copyWith(
-                      color: AppColors.primary1,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 11,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 28),
-
-                // Menu Items matching Figma
+                const SizedBox(height: 24),
                 ProfileMenuItem(
                   icon: Icons.settings_outlined,
                   title: AppStrings.menuSettings,
@@ -190,8 +152,6 @@ class ProfilePage extends StatelessWidget {
                       _showComingSoon(context, AppStrings.menuFollowers),
                 ),
                 const SizedBox(height: 16),
-
-                // Log Out
                 ProfileMenuItem(
                   icon: Icons.power_settings_new_rounded,
                   title: AppStrings.menuLogOut,

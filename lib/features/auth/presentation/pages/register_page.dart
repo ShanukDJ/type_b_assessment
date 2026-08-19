@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: Text(
           AppStrings.createAccount,
-          style: AppTextStyles.headingSmall,
+          style: AppTextStyles.screenTitle,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
@@ -138,7 +138,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 24),
 
-                    // First & Last Name
                     Row(
                       children: [
                         Expanded(
@@ -165,8 +164,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                     const SizedBox(height: 16),
-
-                    // Username
                     CustomTextField(
                       controller: _usernameController,
                       hintText: AppStrings.username,
@@ -176,8 +173,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           : null,
                     ),
                     const SizedBox(height: 16),
-
-                    // Email
                     CustomTextField(
                       controller: _emailController,
                       hintText: AppStrings.email,
@@ -194,8 +189,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     const SizedBox(height: 16),
-
-                    // Password
                     CustomTextField(
                       controller: _passwordController,
                       hintText: AppStrings.password,
@@ -206,8 +199,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           : null,
                     ),
                     const SizedBox(height: 16),
-
-                    // Confirm Password
                     CustomTextField(
                       controller: _confirmPasswordController,
                       hintText: AppStrings.confirmPassword,
@@ -222,16 +213,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     const SizedBox(height: 28),
-
-                    // Register Button
                     CustomButton(
                       text: AppStrings.register,
                       onPressed: _submitRegister,
                       isLoading: isLoading,
                     ),
                     const SizedBox(height: 20),
-
-                    // Already have an account? Login
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

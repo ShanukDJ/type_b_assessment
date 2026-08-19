@@ -152,8 +152,8 @@ class GoogleSignInButton extends StatelessWidget {
             Text(
               AppStrings.loginWithGoogle,
               style: AppTextStyles.buttonSecondaryText.copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
                 color: AppColors.onSurface,
               ),
             ),

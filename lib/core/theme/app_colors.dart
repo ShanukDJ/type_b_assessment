@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Design tokens derived from Figma specifications
+/// Application color palette and theme definitions.
 class AppColors {
   AppColors._();
 
@@ -25,7 +25,7 @@ class AppColors {
   static const LinearGradient loginHeaderGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF2C8C6B), Color(0xFF41AC85)],
+    colors: [Color(0xFF41AC85), Color(0xFF127970)],
   );
 
   static const LinearGradient featuredCardGradient = LinearGradient(

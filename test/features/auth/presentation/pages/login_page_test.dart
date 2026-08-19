@@ -26,9 +26,7 @@ void main() {
   }
 
   group('LoginPage Widget Test', () {
-    testWidgets('renders all login UI elements including quick test accounts', (
-      tester,
-    ) async {
+    testWidgets('renders all login UI elements', (tester) async {
       tester.view.physicalSize = const Size(800, 1400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -44,26 +42,6 @@ void main() {
       expect(find.text(AppStrings.loginWithBiometrics), findsOneWidget);
       expect(find.text(AppStrings.loginWithGoogle), findsOneWidget);
       expect(find.text(AppStrings.signUp), findsOneWidget);
-      expect(find.text('👤 emilys'), findsOneWidget);
-      expect(find.text('👤 michaelw'), findsOneWidget);
-    });
-
-    testWidgets('populates fields when tapping quick account chips', (
-      tester,
-    ) async {
-      tester.view.physicalSize = const Size(800, 1400);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      final chipFinder = find.text('👤 michaelw');
-      await tester.ensureVisible(chipFinder);
-      await tester.tap(chipFinder);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(LoginPage), findsOneWidget);
     });
   });
 }

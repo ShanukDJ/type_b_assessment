@@ -26,6 +26,13 @@ class AppTextStyles {
     color: AppColors.onSurface,
   );
 
+  // Screen / AppBar Titles (18px, Regular 400)
+  static TextStyle get screenTitle => GoogleFonts.lexendDeca(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: AppColors.onSurface,
+  );
+
   // Section Headers
   static TextStyle get sectionTitle => GoogleFonts.lexendDeca(
     fontSize: 18,

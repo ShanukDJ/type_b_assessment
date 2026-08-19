@@ -1,4 +1,4 @@
-/// Predefined static strings singleton for NewsBay application
+/// Application string constants.
 class AppStrings {
   AppStrings._();
 
@@ -29,7 +29,6 @@ class AppStrings {
   static const String notAMember = 'Not a member? ';
   static const String alreadyHaveAccount = 'Already have an account? ';
   static const String signUp = 'Sign up';
-  static const String quickDemoAccounts = 'Quick Demo Accounts:';
   static const String usernameValidation =
       'Please enter your username or email';
   static const String passwordValidation = 'Please enter your password';
@@ -107,7 +106,6 @@ class AppStrings {
   static const String logoutDialogMessage =
       'Are you sure you want to log out from NewsBay?';
   static const String cancel = 'Cancel';
-  static const String environmentPrefix = 'Environment:';
   static const String changeAvatarFeature = 'Change Avatar';
 
   // Errors & Fallbacks

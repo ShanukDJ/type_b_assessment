@@ -80,7 +80,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: Text(title, style: AppTextStyles.headingSmall),
+        title: Text(title, style: AppTextStyles.screenTitle),
         automaticallyImplyLeading: false,
       ),
       body: Center(

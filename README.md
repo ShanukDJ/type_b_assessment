@@ -1,104 +1,127 @@
-# 📰 NewsBay — Flutter Enterprise Application
+# NewsBay
 
-NewsBay is a high-performance news & articles mobile application built with Flutter, adhering strictly to **Clean Architecture**, **BLoC Pattern**, **Repository Pattern**, **Offline-First Secure Storage**, and the **DummyJSON API**.
-
----
-
-## 🎯 Enterprise Features
-
-### 🔐 Authentication & Security Suite
-- **User Registration (`/users/add`)**: Complete signup flow with field validation (names, username, email regex, password matching).
-- **JWT Token Management & Auto-Refresh (`/auth/refresh`)**: Dio interceptor transparently refreshes expired JWT access tokens using the refresh token on 401 Unauthorized responses.
-- **Biometric Authentication**: Local biometric authentication (FaceID / TouchID / Fingerprint) abstraction via `BiometricService` for quick logins.
-- **Secure Persistence (`flutter_secure_storage`)**: Sensitive JWT access/refresh tokens and user sessions are encrypted in iOS Keychain (`kSecAttrAccessibleAfterFirstUnlock`) and Android KeyStore (AES-CBC).
-- **Session Auto-Restoration (`/auth/me`)**: Validates active session on app launch.
-- **Quick Demo Accounts**: One-tap credential fill for `emilys` and `michaelw`.
-
-### 📶 Offline-First Resilience
-- **Offline Post Caching (`PostLocalDataSource`)**: Automatically persists the initial feed to encrypted local storage so articles can be viewed offline.
-- **Network Status Monitoring (`NetworkInfoService`)**: Real-time connectivity monitor with an animated offline status indicator banner.
-
-### 📱 Responsive & Adaptive UI
-- **Adaptive Breakpoints (`ResponsiveLayout`)**:
-  - **Mobile (< 600dp)**: Single-column vertical list with pull-to-refresh.
-  - **Tablet & Landscape (600dp - 1024dp+)**: Multi-column responsive grid with adaptive aspect ratios.
-- **Micro-interactions & Animations**: 60fps shimmer loading skeletons (`AppShimmer`), Hero transitions for cards (`Hero(tag: 'post_card_...')`), and smooth list animations.
-
-### 🧪 Comprehensive Testing Suite
-- **119 Automated Tests**: Unit tests, Data Source mocks, BLoC state transition tests (`bloc_test`), Widget tests (`login_page_test`, `register_page_test`, `post_card_widget_test`), and E2E Integration tests (`integration_test/app_test.dart`).
-- **High Test Coverage**: **79.42%** across all tested business logic and presentation components.
-
-### 🚀 CI/CD Pipeline
-- **GitHub Actions (`.github/workflows/ci_cd.yml`)**:
-  - Code formatting & static lint analysis (`flutter analyze`)
-  - Unit & widget test execution with coverage enforcement
-  - Multi-environment compilation matrix (`dev`, `staging`, `prod`)
+NewsBay is a Flutter news and articles reader application built with clean architecture, BLoC state management, and offline-first capabilities using the DummyJSON API.
 
 ---
 
-## 🏗️ Architecture & State Management
+## Architecture Overview
+
+The codebase follows Clean Architecture principles divided into three core layers:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                       │
-│    (Pages, Widgets, Custom UI, BLoC Events & States)       │
-└──────────────────────────────▲──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│                      Domain Layer                           │
-│     (Entities, Repository Interfaces, Typed Failures)       │
-└──────────────────────────────▲──────────────────────────────┘
-                               │
-┌──────────────────────────────▼──────────────────────────────┐
-│                       Data Layer                            │
-│  (Repository Implementations, Remote/Local DataSources,     │
-│   DTO Models, Dio HTTP Client, FlutterSecureStorage)        │
-└─────────────────────────────────────────────────────────────┘
+lib/
+├── core/
+│   ├── config/          # Environment configuration (Dev, Staging, Prod)
+│   ├── constants/       # App strings and asset paths
+│   ├── errors/          # Custom exceptions and typed failures
+│   ├── network/         # Dio client and token refresh interceptors
+│   ├── services/        # Biometric and connectivity services
+│   ├── storage/         # Secure storage service
+│   ├── theme/           # Colors, typography, and theme definitions
+│   ├── utils/           # Debouncer and result helpers
+│   └── widgets/         # Reusable UI components (buttons, text fields, skeletons)
+└── features/
+    ├── auth/            # Authentication (login, registration, session management)
+    │   ├── data/
+    │   ├── domain/
+    │   └── presentation/
+    ├── home/            # Main navigation wrapper
+    ├── posts/           # Posts feed, search, and detail view
+    │   ├── data/
+    │   ├── domain/
+    │   └── presentation/
+    └── profile/         # User profile and settings
+        └── presentation/
 ```
 
+### Key Features
+
+- **Authentication & Security**:
+  - Email/username login and account registration.
+  - JWT token storage in encrypted platform storage (`flutter_secure_storage`).
+  - Automatic token refresh interceptor handling `401 Unauthorized` responses.
+  - Biometric authentication integration via `BiometricService`.
+- **Feed & Reading Experience**:
+  - Paginated article feed with pull-to-refresh and infinite scrolling.
+  - Live search with debouncing.
+  - Featured posts carousel and recent posts grid/list.
+  - Article detail view with engagement metrics.
+- **Offline Support**:
+  - Local caching of fetched posts for offline reading.
+  - Network connectivity monitoring with an offline status banner.
+- **Responsive Layout**:
+  - Adapts between single-column mobile view and multi-column grid layouts for tablets and wider screens.
+  - Custom shimmer skeletons for smooth loading states.
+
 ---
 
-## 🔑 Demo Credentials
+## Getting Started
 
-| Username | Password | Full Name |
-| :--- | :--- | :--- |
-| `emilys` | `emilyspass` | Emily Johnson |
-| `michaelw` | `michaelwpass` | Michael Williams |
+### Prerequisites
+
+- Flutter SDK (3.12.2 or higher)
+- Dart SDK
+- Android Studio / Xcode for device simulation
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd type_b_assessment
+   ```
+
+2. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+3. Run the application:
+   ```bash
+   flutter run
+   ```
 
 ---
 
-## ⚙️ Multi-Environment Configuration
+## Environment Configurations
 
-| Setting | Dev | Staging | Production |
+The application supports multiple environments via `--dart-define` parameters:
+
+| Parameter | Dev | Staging | Production |
 | :--- | :---: | :---: | :---: |
-| **API Base URL** | `https://dummyjson.com` | `https://dummyjson.com` | `https://dummyjson.com` |
-| **Pagination Limit** | `10` | `15` | `20` |
-| **Search Debounce** | `300ms` | `500ms` | `800ms` |
+| `ENVIRONMENT` | `dev` | `staging` | `prod` |
+| `API_BASE_URL` | `https://dummyjson.com` | `https://dummyjson.com` | `https://dummyjson.com` |
+| `PAGINATION_LIMIT` | `10` | `15` | `20` |
+| `SEARCH_DEBOUNCE_MS` | `300` | `500` | `800` |
 
-### Running via `--dart-define`
+### Running with specific environments
 
 ```bash
 # Development
-flutter run --dart-define=ENVIRONMENT=dev --dart-define=API_BASE_URL=https://dummyjson.com --dart-define=PAGINATION_LIMIT=10 --dart-define=SEARCH_DEBOUNCE_MS=300
+flutter run --dart-define=ENVIRONMENT=dev --dart-define=PAGINATION_LIMIT=10 --dart-define=SEARCH_DEBOUNCE_MS=300
 
 # Staging
-flutter run --dart-define=ENVIRONMENT=staging --dart-define=API_BASE_URL=https://dummyjson.com --dart-define=PAGINATION_LIMIT=15 --dart-define=SEARCH_DEBOUNCE_MS=500
+flutter run --dart-define=ENVIRONMENT=staging --dart-define=PAGINATION_LIMIT=15 --dart-define=SEARCH_DEBOUNCE_MS=500
 
 # Production
-flutter run --dart-define=ENVIRONMENT=prod --dart-define=API_BASE_URL=https://dummyjson.com --dart-define=PAGINATION_LIMIT=20 --dart-define=SEARCH_DEBOUNCE_MS=800
+flutter run --dart-define=ENVIRONMENT=prod --dart-define=PAGINATION_LIMIT=20 --dart-define=SEARCH_DEBOUNCE_MS=800
 ```
 
 ---
 
-## 🧪 Testing Commands
+## Testing & Quality
 
+### Static Analysis
 ```bash
-# Run all unit and widget tests
-flutter test --coverage
+flutter analyze
+```
 
-# Check test coverage report
-dart pub global run test_cov_console
+### Unit & Widget Tests
+```bash
+flutter test
+```
 
-# Run E2E Integration test
+### Integration Tests
+```bash
 flutter test integration_test/app_test.dart
 ```

@@ -30,7 +30,7 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
-/// Adaptive animated shimmer wrapper providing smooth gradient sweep
+/// Animated shimmer wrapper widget for skeleton loading states.
 class AppShimmer extends StatefulWidget {
   final Widget child;
   final Color baseColor;
@@ -141,7 +141,7 @@ class ShimmerBox extends StatelessWidget {
   }
 }
 
-/// Shimmer card matching Recent Posts
+/// Skeleton placeholder for a post card.
 class PostCardSkeleton extends StatelessWidget {
   const PostCardSkeleton({super.key});
 
@@ -162,7 +162,6 @@ class PostCardSkeleton extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Author row shimmer
             Row(
               children: [
                 const ShimmerBox(width: 34, height: 34, shape: BoxShape.circle),
@@ -173,8 +172,6 @@ class PostCardSkeleton extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 14),
-
-            // Title block
             const ShimmerBox(
               width: double.infinity,
               height: 18,
@@ -183,8 +180,6 @@ class PostCardSkeleton extends StatelessWidget {
             const SizedBox(height: 6),
             const ShimmerBox(width: 240, height: 18, borderRadius: 4),
             const SizedBox(height: 10),
-
-            // Body snippet lines
             const ShimmerBox(
               width: double.infinity,
               height: 13,
@@ -193,8 +188,6 @@ class PostCardSkeleton extends StatelessWidget {
             const SizedBox(height: 4),
             const ShimmerBox(width: 180, height: 13, borderRadius: 4),
             const SizedBox(height: 16),
-
-            // Metadata row (Likes, Comments, Time)
             Row(
               children: const [
                 ShimmerBox(width: 48, height: 14, borderRadius: 4),
@@ -211,7 +204,7 @@ class PostCardSkeleton extends StatelessWidget {
   }
 }
 
-/// Shimmer card matching Featured Posts
+/// Skeleton placeholder for a featured post card.
 class FeaturedPostCardSkeleton extends StatelessWidget {
   const FeaturedPostCardSkeleton({super.key});
 
@@ -259,7 +252,7 @@ class FeaturedPostCardSkeleton extends StatelessWidget {
   }
 }
 
-/// Full dashboard shimmer loading view
+/// Full dashboard shimmer loading view.
 class DashboardShimmerView extends StatelessWidget {
   final bool isSearching;
 
@@ -272,7 +265,6 @@ class DashboardShimmerView extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           if (!isSearching) ...[
-            // Featured section title shimmer
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Row(
@@ -284,7 +276,6 @@ class DashboardShimmerView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            // Horizontal featured carousel shimmer
             SizedBox(
               height: 262,
               child: ListView.builder(
@@ -298,8 +289,6 @@ class DashboardShimmerView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
           ],
-
-          // Recent posts header shimmer
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: Row(
@@ -310,8 +299,6 @@ class DashboardShimmerView extends StatelessWidget {
               ],
             ),
           ),
-
-          // Vertical posts list shimmer
           const PostCardSkeleton(),
           const PostCardSkeleton(),
           const PostCardSkeleton(),

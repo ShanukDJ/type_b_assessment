@@ -92,10 +92,7 @@ class _DashboardPageState extends State<DashboardPage> {
         bottom: false,
         child: Column(
           children: [
-            // Top Header
             DashboardHeader(onProfileTap: widget.onProfileTap),
-
-            // Offline Banner (if offline)
             if (_isOffline)
               Container(
                 width: double.infinity,
@@ -124,21 +121,15 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                 ),
               ),
-
-            // Search Bar
             SearchBarWidget(appConfig: widget.appConfig),
-
-            // Main Content Area
             Expanded(
               child: BlocBuilder<PostsBloc, PostsState>(
                 builder: (context, state) {
-                  // Initial / Full Loading State with Adaptive Shimmer
                   if (state.status == PostsStatus.loading &&
                       state.posts.isEmpty) {
                     return DashboardShimmerView(isSearching: state.isSearching);
                   }
 
-                  // Error State
                   if (state.status == PostsStatus.error &&
                       state.posts.isEmpty) {
                     return ErrorView(
@@ -152,7 +143,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   }
 
-                  // Empty State
                   if (state.status == PostsStatus.empty ||
                       (state.status == PostsStatus.loaded &&
                           state.posts.isEmpty)) {
@@ -182,7 +172,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   }
 
-                  // Loaded Feed (with Pull-to-refresh & Infinite Scroll)
                   return RefreshIndicator(
                     onRefresh: () async {
                       context.read<PostsBloc>().add(const RefreshPostsEvent());
@@ -194,7 +183,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         parent: BouncingScrollPhysics(),
                       ),
                       slivers: [
-                        // Featured Posts Carousel (Only when NOT searching)
                         if (!state.isSearching &&
                             state.featuredPosts.isNotEmpty) ...[
                           SliverToBoxAdapter(
@@ -205,8 +193,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           const SliverToBoxAdapter(child: SizedBox(height: 12)),
                         ],
-
-                        // Section Title: "Recent Posts" or Search Results Header
                         SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -240,8 +226,6 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-
-                        // List of Post Cards (Responsive: Grid on tablet/desktop, List on mobile)
                         if (gridColumns > 1)
                           SliverPadding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -278,8 +262,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               );
                             }, childCount: state.posts.length),
                           ),
-
-                        // Bottom Pagination Loader or End of List Indicator
                         SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),

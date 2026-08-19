@@ -49,7 +49,6 @@ class PostCardWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Author info row
               Row(
                 children: [
                   Container(
@@ -84,8 +83,6 @@ class PostCardWidget extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-
-              // Post Title
               Text(
                 post.title,
                 maxLines: 2,
@@ -98,8 +95,6 @@ class PostCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-
-              // Post Body Snippet
               Text(
                 post.body,
                 maxLines: 2,
@@ -111,8 +106,6 @@ class PostCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-
-              // Metadata row (Likes, Comments/Tags, Time)
               Row(
                 children: [
                   const Icon(

@@ -8,40 +8,36 @@ class LoginHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Container(
       width: double.infinity,
-      height: screenHeight * 0.36,
+      height: 308,
       decoration: const BoxDecoration(gradient: AppColors.loginHeaderGradient),
       child: SafeArea(
         bottom: false,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 68,
-                height: 68,
-                decoration: BoxDecoration(
-                  color: AppColors.white.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                    color: AppColors.white.withValues(alpha: 0.3),
-                    width: 1.5,
-                  ),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 38),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.article_rounded,
+                  size: 40,
+                  color: AppColors.white,
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.article_rounded,
-                    size: 38,
+                const SizedBox(height: 2),
+                Text(
+                  AppStrings.appName,
+                  style: AppTextStyles.headingLarge.copyWith(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.white,
+                    letterSpacing: 0,
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Text(AppStrings.appName, style: AppTextStyles.logoText),
-            ],
+              ],
+            ),
           ),
         ),
       ),

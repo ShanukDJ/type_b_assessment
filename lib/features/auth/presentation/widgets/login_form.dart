@@ -42,12 +42,6 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  void _fillCredentials(String username, String password) {
-    setState(() {
-      _usernameController.text = username;
-      _passwordController.text = password;
-    });
-  }
 
   void _navigateToRegister() {
     Navigator.of(
@@ -96,12 +90,14 @@ class _LoginFormState extends State<LoginForm> {
             children: [
               Text(
                 AppStrings.welcomeBack,
-                style: AppTextStyles.headingLarge,
+                style: AppTextStyles.headingLarge.copyWith(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
 
-              // Username / Email Field
               CustomTextField(
                 controller: _usernameController,
                 hintText: AppStrings.emailOrUsername,
@@ -115,8 +111,6 @@ class _LoginFormState extends State<LoginForm> {
                 },
               ),
               const SizedBox(height: 16),
-
-              // Password Field
               CustomTextField(
                 controller: _passwordController,
                 hintText: AppStrings.password,
@@ -131,8 +125,6 @@ class _LoginFormState extends State<LoginForm> {
                 },
               ),
               const SizedBox(height: 12),
-
-              // Remember me & Forgot password
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -207,16 +199,12 @@ class _LoginFormState extends State<LoginForm> {
                 ],
               ),
               const SizedBox(height: 24),
-
-              // Login Button
               CustomButton(
                 text: AppStrings.login,
                 onPressed: _submitLogin,
                 isLoading: isLoading,
               ),
               const SizedBox(height: 14),
-
-              // Biometric Authentication Button
               CustomButton(
                 text: AppStrings.loginWithBiometrics,
                 onPressed: _loginWithBiometrics,
@@ -228,8 +216,6 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
               const SizedBox(height: 18),
-
-              // Or divider
               Row(
                 children: [
                   const Expanded(child: Divider(color: AppColors.line)),
@@ -247,8 +233,6 @@ class _LoginFormState extends State<LoginForm> {
                 ],
               ),
               const SizedBox(height: 18),
-
-              // Login with Google Button
               GoogleSignInButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -263,98 +247,7 @@ class _LoginFormState extends State<LoginForm> {
                   );
                 },
               ),
-              const SizedBox(height: 20),
-
-              // Quick Test Account Chips
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.line, width: 0.8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.quickDemoAccounts,
-                      style: AppTextStyles.bodySmall.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondary,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () =>
-                                _fillCredentials('emilys', 'emilyspass'),
-                            borderRadius: BorderRadius.circular(8),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 6,
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: AppColors.primary1.withValues(
-                                    alpha: 0.4,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                '👤 emilys',
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.bodySmall.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.primary1,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () =>
-                                _fillCredentials('michaelw', 'michaelwpass'),
-                            borderRadius: BorderRadius.circular(8),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 6,
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: AppColors.primary1.withValues(
-                                    alpha: 0.4,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                '👤 michaelw',
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.bodySmall.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.primary1,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 24),
-
-              // Not a member? Sign up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

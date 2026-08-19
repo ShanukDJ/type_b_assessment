@@ -40,50 +40,17 @@ class _PostDetailPageState extends State<PostDetailPage> {
       appBar: AppBar(
         title: Text(
           AppStrings.postDetailTitle,
-          style: AppTextStyles.headingSmall,
+          style: AppTextStyles.screenTitle,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.bookmark_border_rounded),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text(AppStrings.bookmarkedNotice),
-                  backgroundColor: AppColors.primary1,
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.share_outlined),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text(AppStrings.sharingNotice),
-                  backgroundColor: AppColors.primary1,
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Hero Banner
             Container(
               width: double.infinity,
               height: 200,
@@ -149,13 +116,11 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title
                   Text(
                     post.title,
                     style: AppTextStyles.headingLarge.copyWith(
@@ -164,8 +129,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 18),
-
-                  // Author Info Card
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
@@ -209,15 +172,11 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Body Heading
                   Text(
                     AppStrings.articleContent,
                     style: AppTextStyles.sectionTitle.copyWith(fontSize: 16),
                   ),
                   const SizedBox(height: 12),
-
-                  // Body text
                   Text(
                     post.body,
                     style: AppTextStyles.bodyLarge.copyWith(
@@ -227,8 +186,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 28),
-
-                  // Engagement Stats Card
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,

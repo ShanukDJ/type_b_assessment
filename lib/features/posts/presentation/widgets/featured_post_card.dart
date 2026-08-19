@@ -36,7 +36,6 @@ class FeaturedPostCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Green Banner
             Container(
               height: 160,
               width: double.infinity,
@@ -47,8 +46,6 @@ class FeaturedPostCard extends StatelessWidget {
                 child: Text('📖', style: TextStyle(fontSize: 30)),
               ),
             ),
-
-            // Bottom Content
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
